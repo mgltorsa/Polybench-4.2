@@ -1,6 +1,11 @@
 * * * * * * * * * *
-* PolyBench/C 4.2 *
+*Slightly Modified version of PolyBench/C 4.2 *
 * * * * * * * * * *
+
+
+Modifications :
+1. In 2mm and 3mm (Lienar Algebra) - Array initializations which were earlier present within the loop nests inside the kernel computations,
+   are now done within the main routine itself. (*tmp in 2mm and *E, *F, *G in 3mm).
 
 Copyright (c) 2011-2016 the Ohio State University.
 
