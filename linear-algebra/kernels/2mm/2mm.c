@@ -44,9 +44,14 @@ void init_array(int ni, int nj, int nk, int nl,
   for (i = 0; i < nj; i++)
     for (j = 0; j < nl; j++)
       C[i][j] = (DATA_TYPE) ((i*(j+3)+1) % nl) / nl;
+
   for (i = 0; i < ni; i++)
-    for (j = 0; j < nl; j++)
+    for (j = 0; j < nl; j++){
       D[i][j] = (DATA_TYPE) (i*(j+2) % nk) / nk;
+      D[i][j] *= *beta;
+    }
+
+      
 }
 
 
@@ -89,17 +94,18 @@ void kernel_2mm(int ni, int nj, int nk, int nl,
   for (i = 0; i < _PB_NI; i++)
     for (j = 0; j < _PB_NJ; j++)
       {
-	tmp[i][j] = SCALAR_VAL(0.0);
-	for (k = 0; k < _PB_NK; ++k)
-	  tmp[i][j] += alpha * A[i][k] * B[k][j];
+	      for (k = 0; k < _PB_NK; ++k)
+	          tmp[i][j] += alpha * A[i][k] * B[k][j];
       }
-  for (i = 0; i < _PB_NI; i++)
-    for (j = 0; j < _PB_NL; j++)
-      {
-	D[i][j] *= beta;
-	for (k = 0; k < _PB_NJ; ++k)
-	  D[i][j] += tmp[i][k] * C[k][j];
+
+      
+  for (i = 0; i < _PB_NI; i++){
+    for (j = 0; j < _PB_NL; j++){
+	        for (k = 0; k < _PB_NJ; ++k){
+	            D[i][j] += tmp[i][k] * C[k][j];
+          }
       }
+  }
 #pragma endscop
 
 }
@@ -112,6 +118,7 @@ int main(int argc, char** argv)
   int nj = NJ;
   int nk = NK;
   int nl = NL;
+  int i,j;
 
   /* Variable declaration/allocation. */
   DATA_TYPE alpha;
@@ -121,6 +128,13 @@ int main(int argc, char** argv)
   POLYBENCH_2D_ARRAY_DECL(B,DATA_TYPE,NK,NJ,nk,nj);
   POLYBENCH_2D_ARRAY_DECL(C,DATA_TYPE,NJ,NL,nj,nl);
   POLYBENCH_2D_ARRAY_DECL(D,DATA_TYPE,NI,NL,ni,nl);
+
+   for (i = 0; i < _PB_NI; i++)
+    for (j = 0; j < _PB_NJ; j++)
+      {
+	      (*tmp)[i][j] = SCALAR_VAL(0.0);
+      }
+
 
   /* Initialize array(s). */
   init_array (ni, nj, nk, nl, &alpha, &beta,
