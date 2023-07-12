@@ -23,7 +23,7 @@
 
 
 /* Array initialization. */
-static
+
 void init_array(int ni, int nj, int nk, int nl, int nm,
 		DATA_TYPE POLYBENCH_2D(A,NI,NK,ni,nk),
 		DATA_TYPE POLYBENCH_2D(B,NK,NJ,nk,nj),
@@ -124,8 +124,6 @@ int main(int argc, char** argv)
   int nm = NM;
 
   int i,j;
-
-  struct timeval start, end;
 
   /* Variable declaration/allocation. */
   POLYBENCH_2D_ARRAY_DECL(E, DATA_TYPE, NI, NJ, ni, nj);

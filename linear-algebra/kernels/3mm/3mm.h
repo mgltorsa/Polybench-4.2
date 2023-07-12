@@ -96,3 +96,8 @@
 # endif
 
 #endif /* !_3MM_H */
+
+
+#ifndef POLYBENCH_CACHE_SIZE_KB
+# define POLYBENCH_CACHE_SIZE_KB 32770
+#endif
