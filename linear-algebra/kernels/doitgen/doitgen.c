@@ -98,26 +98,26 @@ int main(int argc, char** argv)
   POLYBENCH_2D_ARRAY_DECL(C4,DATA_TYPE,NP,NP,np,np);
 
   /* Initialize array(s). */
-  // init_array (nr, nq, np,
-	//       POLYBENCH_ARRAY(A),
-	//       POLYBENCH_ARRAY(C4));
+  init_array (nr, nq, np,
+	      POLYBENCH_ARRAY(A),
+	      POLYBENCH_ARRAY(C4));
 
-  // /* Start timer. */
-  // polybench_start_instruments;
+  /* Start timer. */
+  polybench_start_instruments;
 
-  // /* Run kernel. */
-  // kernel_doitgen (nr, nq, np,
-	// 	  POLYBENCH_ARRAY(A),
-	// 	  POLYBENCH_ARRAY(C4),
-	// 	  POLYBENCH_ARRAY(sum));
+  /* Run kernel. */
+  kernel_doitgen (nr, nq, np,
+		  POLYBENCH_ARRAY(A),
+		  POLYBENCH_ARRAY(C4),
+		  POLYBENCH_ARRAY(sum));
 
-  // /* Stop and print timer. */
-  // polybench_stop_instruments;
-  // polybench_print_instruments;
+  /* Stop and print timer. */
+  polybench_stop_instruments;
+  polybench_print_instruments;
 
-  // /* Prevent dead-code elimination. All live-out data must be printed
-  //    by the function call in argument. */
-  // polybench_prevent_dce(print_array(nr, nq, np,  POLYBENCH_ARRAY(A)));
+  /* Prevent dead-code elimination. All live-out data must be printed
+     by the function call in argument. */
+  polybench_prevent_dce(print_array(nr, nq, np,  POLYBENCH_ARRAY(A)));
 
   /* Be clean. */
   POLYBENCH_FREE_ARRAY(A);

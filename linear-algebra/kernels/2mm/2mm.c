@@ -13,7 +13,6 @@
 #include <unistd.h>
 #include <string.h>
 #include <math.h>
-#include <sys/time.h>
 
 /* Include polybench common header. */
 #include <polybench.h>
@@ -121,7 +120,6 @@ int main(int argc, char** argv)
   int nl = NL;
   int i,j;
 
-  struct timeval start, end;
   /* Variable declaration/allocation. */
   DATA_TYPE alpha;
   DATA_TYPE beta;

@@ -13,7 +13,6 @@
 #include <unistd.h>
 #include <string.h>
 #include <math.h>
-#include <sys/time.h>
 
 /* Include polybench common header. */
 #include <polybench.h>
@@ -44,8 +43,6 @@ void init_array(int ni, int nj, int nk, int nl, int nm,
   for (i = 0; i < nm; i++)
     for (j = 0; j < nl; j++)
       D[i][j] = (DATA_TYPE) ((i*(j+2)+2) % nk) / (5*nk);
-
-  
 }
 
 

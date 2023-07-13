@@ -100,7 +100,6 @@ int main(int argc, char** argv)
   int n = N;
   int m = M;
 
-
   /* Variable declaration/allocation. */
   POLYBENCH_2D_ARRAY_DECL(A, DATA_TYPE, N, M, n, m);
   POLYBENCH_1D_ARRAY_DECL(s, DATA_TYPE, M, m);
