@@ -14,12 +14,16 @@
 #include <string.h>
 #include <math.h>
 #include <sys/time.h>
+#include <omp.h>
 
 /* Include polybench common header. */
 #include <polybench.h>
 
 /* Include benchmark-specific header. */
 #include "3mm.h"
+
+/* Custom utilities */
+#include <logger.h>
 
 static int balancedTileSize;
 static int cores;
@@ -191,6 +195,8 @@ int main(int argc, char **argv)
 
   if(argc > 1 && argv[1] != "") {
     balancedTileSize = atoi(argv[1]);
+
+    logger("Balanced tile size %f", balancedTileSize);
   }else{
     printf("NO BALANCED TILE SIZE ENV");
     return -1;
@@ -222,6 +228,23 @@ int main(int argc, char **argv)
              POLYBENCH_ARRAY(C),
              POLYBENCH_ARRAY(D));
 
+
+  int thread_limit, num_threads, threads_max, thread_id;
+  
+  #pragma omp parallel {
+
+    thread_id = omp_get_thread_num();
+    if(thread_id == 0) {
+
+      thread_limit = omp_get_thread_limit();
+      num_threads = omp_get_num_threads();
+      threads_max = omp_get_max_threads(); 
+    }
+  }
+
+  logger("Tlimit %d, TNms %d, TMax, %d", thread_limit, num_threads, thread_max);
+
+  
   /* Start timer. */
   polybench_start_instruments;
 
