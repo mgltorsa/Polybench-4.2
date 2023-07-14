@@ -20,6 +20,8 @@
 /* Include benchmark-specific header. */
 #include "3mm.h"
 
+/* Custom utilities */
+#include <experiments.h>
 
 /* Array initialization. */
 
@@ -163,6 +165,8 @@ int main(int argc, char** argv)
 
   /* Stop and print timer. */
   polybench_stop_instruments;
+
+  printe("3mm","til-1", (long)ni+nj+nl+nm+nk,0);
   polybench_print_instruments;
 
   /* Prevent dead-code elimination. All live-out data must be printed

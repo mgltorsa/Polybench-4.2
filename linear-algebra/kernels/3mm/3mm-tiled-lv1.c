@@ -14,6 +14,7 @@
 #include <string.h>
 #include <math.h>
 #include <sys/time.h>
+#include <omp.h>
 
 /* Include polybench common header. */
 #include <polybench.h>
@@ -21,6 +22,8 @@
 /* Include benchmark-specific header. */
 #include "3mm.h"
 
+/* Custom utilities */
+#include <experiments.h>
 
 static int balancedTileSize;
 static int cores;
@@ -185,13 +188,6 @@ int main(int argc, char **argv)
     return -1;
   }
 
-  if(argc > 2 && argv[2] != "") {
-    cores = atoi(argv[2]);
-  }else{
-    printf("NO CORES ENV");
-    return -1;
-  }
-
 
 
   int i, j;
@@ -239,6 +235,7 @@ int main(int argc, char **argv)
   polybench_stop_instruments;
 
   //TODO: Print in an specific format
+  printe("3mm","til-1", (long)ni+nj+nl+nm+nk,balancedTileSize);
   polybench_print_instruments;
 
   /* Prevent dead-code elimination. All live-out data must be printed

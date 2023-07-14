@@ -335,7 +335,9 @@ void polybench_papi_print()
 	  {
 	    if (verbose)
 	      printf ("%s=", _polybench_papi_eventlist[evid]);
+      //TODO: Uncomment next line to get back to original polybench impl
 	    printf ("%llu ", polybench_papi_values[evid]);
+      // printf ("%llu;", polybench_papi_values[evid]);
 	    if (verbose)
 	      printf ("\n");
 	  }
