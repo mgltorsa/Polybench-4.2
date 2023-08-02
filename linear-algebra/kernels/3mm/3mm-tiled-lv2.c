@@ -255,7 +255,7 @@ int main(int argc, char **argv)
 
   int cache_size = POLYBENCH_CACHE_SIZE_KB;
   //TODO: Print in an specific format
-  printe("3mm","til-1", (long)ni+nj+nl+nm+nk,balancedTileSize, cache_size);
+  printe("3mm","til-2", (long)ni+nj+nl+nm+nk,balancedTileSize, cache_size);
   polybench_print_instruments;
 
   /* Prevent dead-code elimination. All live-out data must be printed

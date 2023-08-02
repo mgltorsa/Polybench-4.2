@@ -14,15 +14,17 @@
 ## however, to ensure we are only using physical cores, 
 ## we have defined --threads-per-core=1
 
+. ./setup.sh
 
-# NUM_CORES="$SLURM_CPUS_PER_TASK"
+NUM_CORES=$SLURM_CPUS_PER_TASK
+echo $NUM_CORES
+export OMP_NUM_THREADS=$NUM_CORES
 
-# export OMP_NUM_THREADS=$NUM_CORES
 
 # Wait a minute for some debug tasks
-wait 60
-
-export OMP_NUM_THREADS=3
+sleep 10 & 
+wait
+# export OMP_NUM_THREADS=3
 
 for i in {1..10}; do
     "$@"

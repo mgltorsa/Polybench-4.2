@@ -1,5 +1,11 @@
 #!/bin/bash
 
+vpkg_require papi
+export PAPI_DIR=/work/parot/sw/papi/src/install/3.7
+export PATH=$PATH:$PAPI_DIR/bin
+export LD_LIBRARY_PATH=${PAPI_DIR}/lib:$LD_LIBRARY_PATH
+export LIBRARY_PATH=${PAPI_DIR}/lib:$LIBRARY_PATH
+export CPATH=${PAPI_DIR}/include:$CPATH
 # Imports cache
 . ./slurm/setup.sh
 
@@ -8,6 +14,8 @@ CACHE_SIZE=8000
 
 # BIN FOLDER
 BIN_FOLDER=bin
+
+mkdir $BIN_FOLDER
 
 # GCC FLAGS
 
