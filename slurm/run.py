@@ -15,17 +15,17 @@ def run_experiment(cores, template, experiment, experiment_type, extra_params=[]
         print(f"Error executing the script: {e}")
 
 
-def run_experiments(experiment_type='time'):
+def run_experiments(experiment='3mm',experiment_type='time'):
     # cores_list = [1, 2, 4, 8, 10]
     cores_list=[1,2]
     # tile_sizes = range(16,2016,16)
     tile_sizes=range(16,32,16)
     template = 'experiment.sh'
     for core in cores_list:
-        run_experiment(core, template, '3mm', experiment_type,[],'echo')
+        run_experiment(core, template, experiment, experiment_type,[],'echo')
         for tile_size in tile_sizes:
-            run_experiment(core, template, '3mm_tiled-lv1', experiment_type, [tile_size], 'echo')
-            run_experiment(core, template, '3mm_tiled-lv2', experiment_type, [tile_size], 'echo')
+            run_experiment(core, template, experiment+'_tiled-lv1', experiment_type, [tile_size], 'echo')
+            run_experiment(core, template, experiment+'_tiled-lv2', experiment_type, [tile_size], 'echo')
 
 
 if __name__ == "__main__":
