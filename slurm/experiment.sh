@@ -3,6 +3,11 @@
 #SBATCH --sockets-per-node=1
 #SBATCH --threads-per-core=1
 #SBATCH --nodes=1
+#SBATCH --exclusive
+#SBATCH --mail-type=END,FAIL            # Mail events (NONE, BEGIN, END, FAIL, ALL)
+#SBATCH --mail-user=mgltorsa@udel.edu   # Where to send mail
+#SBATCH --time=32:00:00
+#SBATCH --constraint='Gen2'
 
 ## README! the flag --cores-per-socket it's supposed
 ## to be passed from the orquestator algorithm.
@@ -14,7 +19,10 @@
 
 # export OMP_NUM_THREADS=$NUM_CORES
 
-export OMP_NUM_THREADS=2
+# Wait a minute for some debug tasks
+wait 60
+
+export OMP_NUM_THREADS=3
 
 for i in {1..10}; do
     "$@"

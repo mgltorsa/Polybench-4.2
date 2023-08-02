@@ -223,23 +223,7 @@ int main(int argc, char **argv)
              POLYBENCH_ARRAY(D));
 
 
-  int thread_limit, num_threads, threads_max, thread_id;
-  
-  #pragma omp parallel
-  {
-
-    thread_id = omp_get_thread_num();
-    if(thread_id == 0) {
-
-      thread_limit = omp_get_thread_limit();
-      num_threads = omp_get_num_threads();
-      threads_max = omp_get_max_threads(); 
-    }
-  }
-  int cache_size = POLYBENCH_CACHE_SIZE_KB;
-
-  logger("CACHE: %d, Tlimit: %d, TNms: %d, TMax: %d ", cache_size, thread_limit, num_threads, threads_max);
-
+ 
 
   
   /* Start timer. */
@@ -269,8 +253,9 @@ int main(int argc, char **argv)
   /* Stop and print timer. */
   polybench_stop_instruments;
 
+  int cache_size = POLYBENCH_CACHE_SIZE_KB;
   //TODO: Print in an specific format
-  printe("3mm","til-1", (long)ni+nj+nl+nm+nk,balancedTileSize);
+  printe("3mm","til-1", (long)ni+nj+nl+nm+nk,balancedTileSize, cache_size);
   polybench_print_instruments;
 
   /* Prevent dead-code elimination. All live-out data must be printed

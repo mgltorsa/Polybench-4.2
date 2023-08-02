@@ -9,9 +9,8 @@
 #include <sys/resource.h>
 #include <sched.h>
 #include <math.h>
-#ifdef _OPENMP
 #include <omp.h>
-#endif
+#include <polybench.h>
 
 #include <experiments.h>
 
@@ -60,6 +59,23 @@ char* slurm_get_node_id(){
 }
 
 
-void printe(char *algorithm, char *version, long size, int tile_size){
-    printf("%s %s %ld %s %d ",algorithm, version, size, get_experiment_type(), tile_size);
+void printe(char *algorithm, char *version, long size, int tile_size, int cache_size){
+    int num_threads, threads_max, thread_id=0;
+  
+    #pragma omp parallel
+    {
+
+        thread_id = omp_get_thread_num();
+        if(thread_id == 0) {
+            num_threads = omp_get_num_threads();
+            threads_max = omp_get_max_threads(); 
+        }
+    }
+
+    logger("CACHE: %d, TNms: %d, TMax: %d \n", cache_size, num_threads, threads_max);
+
+
+    printf("%s %s %ld %d ", algorithm, version, size, cache_size);
+
+    printf("%s %d %d ", get_experiment_type(), tile_size, threads_max);
 }

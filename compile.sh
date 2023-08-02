@@ -11,7 +11,7 @@ BIN_FOLDER=bin
 
 # GCC FLAGS
 
-DEBUG_FLAG="-DDEBUG"
+# DEBUG_FLAG="-DDEBUG"
 GCC_FLAGS="-lpapi -fopenmp"
 POLY_FLAGS="-DMINI_DATASET -DPOLYBENCH_CACHE_SIZE_KB=$CACHE_SIZE $DEBUG_FLAG"
 POLY_UTILITIES="-I utilities utilities/polybench.c utilities/experiments.c"

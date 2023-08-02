@@ -166,7 +166,7 @@ int main(int argc, char** argv)
   /* Stop and print timer. */
   polybench_stop_instruments;
 
-  printe("3mm","til-1", (long)ni+nj+nl+nm+nk,0);
+  printe("3mm","til-1", (long)ni+nj+nl+nm+nk,0, POLYBENCH_CACHE_SIZE_KB);
   polybench_print_instruments;
 
   /* Prevent dead-code elimination. All live-out data must be printed
