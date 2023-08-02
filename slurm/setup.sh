@@ -1,4 +1,4 @@
 #!/bin/bash
 
 export CAVINESS_CACHE_IN_KB=25600
-export CACHE=$CAVINESS_CACHE
+export CACHE=$CAVINESS_CACHE_IN_KB

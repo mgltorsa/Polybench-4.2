@@ -31,10 +31,10 @@ def run_experiment(cores, template, experiment, experiment_type, extra_params=[]
 
 
 def run_experiments(experiment_type='time', experiment='3mm'):
-    # cores_list = [1, 2, 4, 8, 10]
-    cores_list=[1, 2]
-    # tile_sizes = range(16,2016,16)
-    tile_sizes=range(16,32,16)
+    cores_list = [1, 2, 4, 8, 10]
+    # cores_list=[1, 2]
+    tile_sizes = range(16,2016,16)
+    # tile_sizes=range(16,32,16)
     template = 'experiment.sh'
     created_jobs=[]
     
@@ -59,5 +59,5 @@ def run_experiments(experiment_type='time', experiment='3mm'):
 
 
 if __name__ == "__main__":
-    # run_experiments()
-    run_experiments('papi')
+    run_experiments()
+    # run_experiments('papi')

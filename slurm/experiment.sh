@@ -14,7 +14,10 @@
 ## however, to ensure we are only using physical cores, 
 ## we have defined --threads-per-core=1
 
+
 . ./setup.sh
+
+vpkg_require papi/5.4.3
 
 NUM_CORES=$SLURM_CPUS_PER_TASK
 echo $NUM_CORES
