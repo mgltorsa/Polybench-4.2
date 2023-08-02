@@ -22,10 +22,10 @@ def run_experiments(experiment='3mm',experiment_type='time'):
     tile_sizes=range(16,32,16)
     template = 'experiment.sh'
     for core in cores_list:
-        run_experiment(core, template, experiment, experiment_type,[],'echo')
+        run_experiment(core, template, experiment, experiment_type,[])
         for tile_size in tile_sizes:
-            run_experiment(core, template, experiment+'_tiled-lv1', experiment_type, [tile_size], 'echo')
-            run_experiment(core, template, experiment+'_tiled-lv2', experiment_type, [tile_size], 'echo')
+            run_experiment(core, template, experiment+'_tiled-lv1', experiment_type, [tile_size])
+            run_experiment(core, template, experiment+'_tiled-lv2', experiment_type, [tile_size])
 
 
 if __name__ == "__main__":
